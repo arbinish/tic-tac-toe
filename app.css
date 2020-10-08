@@ -54,6 +54,10 @@ nav .reset {
   font-variant: small-caps;
 }
 
+.reset:hover, .autobot:hover {
+    cursor: pointer;
+}
+
 .cell:hover {
   background-color: rgb(240, 11, 240);
   color: white;
@@ -81,4 +85,9 @@ nav .reset {
     position: absolute;
     bottom: 0;
     right:0;
+}
+
+.autobot:hover {
+    background-color: rgba(240, 11, 240);
+    color: white;
 }
