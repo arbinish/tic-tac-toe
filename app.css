@@ -22,6 +22,7 @@ body {
   font-family: Hack;
   font-variant: small-caps;
   color: rgb(240, 11, 240);
+  text-shadow: 0.3rem 0.4rem 0.3rem rgba(0, 0, 0, 0.3);
   font-size: 3rem;
   align-self: center;
 }
@@ -44,6 +45,7 @@ body {
 nav .reset {
   visibility: hidden;
   margin-left: 1rem;
+  margin-bottom: 0.5rem;
   width: 8vw;
   font-size: 1.1rem;
   background-color: rgb(240, 11, 240);
@@ -52,10 +54,6 @@ nav .reset {
   font-weight: bold;
   cursor: pointer;
   font-variant: small-caps;
-}
-
-.reset:hover, .autobot:hover {
-    cursor: pointer;
 }
 
 .cell:hover {
@@ -75,19 +73,96 @@ nav .reset {
 }
 
 .autobot {
-    align-self: flex-end;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    width: 3rem;
-    height: 3rem;
-    font-variant: small-caps;
-    outline: none;
-    position: absolute;
-    bottom: 0;
-    right:0;
+  align-self: flex-end;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  width: 3rem;
+  height: 3rem;
+  font-variant: small-caps;
+  outline: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .autobot:hover {
-    background-color: rgba(240, 11, 240);
-    color: white;
+  cursor: pointer;
+  background-color: rgb(255, 0, 255);
+  color: white;
+}
+
+header {
+  display: flex;
+  flex-direction: row-reverse;
+  height: 4vh;
+}
+
+.modal {
+  position: absolute;
+  width: 50vw;
+  min-height: 35vh;
+  border-radius: 2rem 0 2rem 2rem;
+  /* border: 2px solid black; */
+  top: 30%;
+  left: 30%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  visibility: hidden;
+  background-color: white;
+  align-items: flex-end;
+  z-index: 999;
+  box-shadow: 0.5rem 1rem 1rem white;
+  transition: visibility ease-in-out;
+}
+
+.modal .content {
+  display: flex;
+  flex-flow: column wrap;
+  width: 100%;
+  min-height: 25vh;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.modal .content span {
+  width: 80%;
+  min-height: 5vh;
+  font-size: 1.2rem;
+  font-variant: small-caps;
+}
+
+.modal .content input {
+  width: 80%;
+  padding: 0.6rem;
+  font-size: 1.2rem;
+}
+.modal span.close {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.modal .save-modal {
+  margin-top: 0.8rem;
+  margin-right: 0.3rem;
+  padding: 0.3rem 0;
+  font-size: 1.1rem;
+  width: 10vw;
+  background-color: rgba(33, 230, 154, 0.911);
+  outline: none;
+}
+
+.black-overlay {
+  /* display: none; */
+  z-index: 100;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  -moz-opacity: 0.8;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
 }

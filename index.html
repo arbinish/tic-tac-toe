@@ -7,6 +7,15 @@
     <script src="app.js" charset="utf-8"></script>
   </head>
   <body>
+    <header><button class="settings">Settings</button></header>
+    <div class="modal">
+      <span class="close">&times;</span>
+      <div class="content">
+        <span>Player-1</span><input type="text" id="player1" name="player1" placeholder="player1 name..."/><br/>
+        <span>Player-2</span><input type="text" id="player2" name="player2" placeholder="player2 name..."/>
+      </div>
+      <button class="save-modal">save</button>
+    </div>
     <div id="main">
       <nav>
         <div id="status"></div>
