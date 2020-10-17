@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('loaded')
     const board = document.querySelector('#container')
     const resetButton = document.querySelector('nav button.reset')
     const autoBot = document.querySelector('.autobot')
@@ -18,19 +17,23 @@ document.addEventListener('DOMContentLoaded', () => {
         [0, 3, 6], [1, 4, 7], [2, 5, 8],
         [0, 4, 8], [2, 4, 6]
     ]
-    let players = ['player1', 'player2']
+    let players = null
+    let scores = {}
 
-    function setRandomUsers() {
-        if (Math.floor(Math.random() * 2) === 0) {
-            sessionStorage.setItem('players', JSON.stringify(['Ayan', 'Eesha']))
-        } else {
-            sessionStorage.setItem('players', JSON.stringify(['Eesha', 'Ayan']))
+    function swapUsers() {
+        let p = sessionStorage.getItem('players')
+        if (p === null) {
+            return
         }
+        p = JSON.parse(p)
+        p = [p[1], p[0]]
+        sessionStorage.setItem('players', JSON.stringify(p))
     }
 
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
+
     window.demo = async () => {
         // demo mode
         let cells = document.querySelectorAll('.cell')
@@ -58,7 +61,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function initBoard() {
         clearBoard()
         turn = 0
+        swapUsers()
+
         players = JSON.parse(sessionStorage.getItem('players')) || ['player-1', 'player-2']
+        // scores not set before. This is the first render of board.
+        // initialize scores.
+        if (scores[players[0]] === undefined) {
+            scores[players[0]] = 0
+            scores[players[1]] = 0
+        }
+        updateScoreBoard()
         for (let i = 0; i < 9; i++) {
             let div = document.createElement('div')
             if (i < 6) {
@@ -86,6 +98,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function updateScoreBoard() {
+        let b = document.querySelector('#score-card ul.card')
+        let html = ""
+        for (let name of Object.keys(scores)) {
+            html += `<li>${name}</li><li class="digit">${scores[name]}</li><br/>`
+        }
+        b.innerHTML = html
+    }
+
     function checkWinner(symbol) {
         let selector = `div[data-marker-id="${symbol}"]`
         let positions = Array.prototype.map.call(
@@ -105,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showMessage(msg) {
         let div = document.querySelector('div.winner')
-        div.innerHTML = `<b>${msg}</b>`
+        div.innerHTML = `<br>${msg}</br>`
     }
 
     function updateStatus(msg) {
@@ -145,7 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (checkWinner(markerId[turn % 2])) {
             let player = `player-${turn % 2 + 1}`
             player = `${players[turn % 2]}`
+            scores[player] += 1
             showMessage(`${player} wins!`)
+            updateScoreBoard()
             gameOver = true
             document.querySelector('button.reset').style.visibility = 'visible'
             return
@@ -187,6 +210,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (hasChanged === true) {
             sessionStorage.setItem('players', JSON.stringify(players))
+            scores = {}
+            scores[players[0]] = 0
+            scores[players[1]] = 0
             hideModal()
             initBoard()
         }

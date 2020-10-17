@@ -23,7 +23,7 @@ body {
   font-variant: small-caps;
   color: rgb(240, 11, 240);
   text-shadow: 0.3rem 0.4rem 0.3rem rgba(0, 0, 0, 0.3);
-  font-size: 3rem;
+  font-size: 2rem;
   align-self: center;
 }
 
@@ -165,4 +165,35 @@ header {
   -moz-opacity: 0.8;
   opacity: 0.8;
   filter: alpha(opacity=80);
+}
+
+#score-card {
+  min-height: 30vh;
+  min-width: 15vw;
+  position: absolute;
+  top: 10vh;
+  left: 1rem;
+  font-family: Hack;
+  font-variant: small-caps;
+  color: rgb(255, 0, 255);
+  font-size: 1.3rem;
+}
+
+ul.card {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  flex-flow: row wrap;
+}
+
+ul.card li {
+  width: 50%;
+  font-size: 1.1rem;
+}
+
+#score-card .digit {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
