@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         [0, 4, 8], [2, 4, 6]
     ]
     let players = null
+    const defaultUsers = ['Ayan', 'Eesha']
     let scores = {}
 
     function swapUsers() {
@@ -63,13 +64,18 @@ document.addEventListener('DOMContentLoaded', () => {
         turn = 0
         swapUsers()
 
-        players = JSON.parse(sessionStorage.getItem('players')) || ['player-1', 'player-2']
+        players = JSON.parse(sessionStorage.getItem('players')) || defaultUsers
         // scores not set before. This is the first render of board.
         // initialize scores.
         if (scores[players[0]] === undefined) {
             scores[players[0]] = 0
             scores[players[1]] = 0
         }
+        // save defaultUsers to benefit swapping turns during initBoard.
+        if (sessionStorage.getItem('players') === null) {
+            sessionStorage.setItem('players', JSON.stringify(players))
+        }
+
         updateScoreBoard()
         for (let i = 0; i < 9; i++) {
             let div = document.createElement('div')

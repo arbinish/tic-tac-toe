@@ -144,11 +144,12 @@ header {
 }
 
 .modal .save-modal {
-  margin-top: 0.8rem;
-  margin-right: 0.3rem;
+  margin-top: 0.5rem;
+  margin-right: 1rem;
   padding: 0.3rem 0;
   font-size: 1.1rem;
   width: 10vw;
+  border-radius: 1vw;
   background-color: rgba(33, 230, 154, 0.911);
   outline: none;
 }
@@ -177,6 +178,10 @@ header {
   font-variant: small-caps;
   color: rgb(255, 0, 255);
   font-size: 1.3rem;
+}
+
+#score-card h3 {
+  text-shadow: 0.2rem 0.3rem 1rem;
 }
 
 ul.card {
